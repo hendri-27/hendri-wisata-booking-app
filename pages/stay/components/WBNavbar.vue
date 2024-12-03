@@ -27,3 +27,9 @@ const handleScroll = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.shadow-bottom {
+  box-shadow: 0 1px 0 0 rgba(0,0,0,.12);
+}
+</style>

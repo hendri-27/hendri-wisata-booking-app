@@ -24,10 +24,34 @@ export type PropertyContentModel = {
     star_rating: number,
   },
   country_code: string,
-  general_info: string | null,
+  general_info: {
+    descriptions: {
+      dining: string,
+      location: string,
+      amenities: string,
+    },
+    spoken_languages: { [id: string]: {
+      id: string,
+      name: string,
+    }}
+  } | null,
   id: string,
   image: string | null,
-  important_info: string | null,
+  important_info: {
+    fees: {
+      optional: string,
+    },
+    checkin: {
+      begin_time: string,
+      instructions: string,
+    },
+    checkout: {
+      time: string,
+    }
+    policies: {
+      know_before_you_go: string,
+    }
+  } | null,
   latitude: number,
   longitude: number,
   name: string,

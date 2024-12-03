@@ -8,7 +8,8 @@ export const getPropertyContentApi = async (
     baseURL: baseUrl,
     query: {
       id: propertyId,
-      include: 'room'
+      language: 'en-us',
+      include: ['image', 'room', 'important_info', 'general_info']
     }
   })
 

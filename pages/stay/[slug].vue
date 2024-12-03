@@ -91,10 +91,10 @@ const transitionClasses = computed(() => {
   return {
     enterActiveClass: 'transition-all duration-300 ease-out',
     leaveActiveClass: 'transition-all duration-300 ease-in',
-    enterFromClass: `transform ${isForward ? 'translate-x-full' : '-translate-x-full'} opacity-0`,
+    enterFromClass: `transform ${isForward ? 'translate-x-2/4' : '-translate-x-2/4'} opacity-0`,
     enterToClass: 'transform translate-x-0 opacity-100',
     leaveFromClass: 'transform translate-x-0 opacity-100',
-    leaveToClass: `transform ${isForward ? '-translate-x-full' : 'translate-x-full'} opacity-0`
+    leaveToClass: `transform ${isForward ? '-translate-x-2/4' : 'translate-x-2/4'} opacity-0`
   }
 })
 </script>
@@ -102,9 +102,9 @@ const transitionClasses = computed(() => {
 <template>
   <div>
     <WBNavbar />
-    <div class="container m-auto">
+    <div class="container m-auto h-screen">
       <WBHeader />
-      <div class="flex justify-center m-3 border-t border-gray">
+      <div class="flex justify-center border-t border-gray">
         <UTabs
           v-model="selected"
           :ui="customUITabs"
@@ -114,6 +114,7 @@ const transitionClasses = computed(() => {
       <div class="w-full relative">
         <Transition
           v-bind="transitionClasses"
+          mode="out-in"
         >
           <NuxtPage class="absolute w-full" />
         </Transition>

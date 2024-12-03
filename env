@@ -1,1 +1,1 @@
-NUXT_PUBLIC_BASE_REST_API=
+NUXT_PUBLIC_BASE_REST_API="https://project-technical-test-api.up.railway.app/"
