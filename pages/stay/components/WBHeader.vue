@@ -27,7 +27,7 @@ const getFormattedAddress = computed(() => {
         />
       </div>
       </div>
-      <div class="py-1 text-wb-light-gray">{{ property.propertyContent?.catalog.category }}</div>
+      <div class="py-1 text-wb-light-gray-100">{{ property.propertyContent?.catalog.category }}</div>
       <div class="pb-1">{{ getFormattedAddress }}</div>
       <div class="flex items-center gap-[10px] py-1">
       <RadialProgress :size="44.5902" :radius="20" :progress="property.propertyContent?.catalog.review_rating" />

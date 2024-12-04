@@ -77,7 +77,6 @@ const selected = computed({
   set(value) {
     previousPosition.value = currentPosition.value
     currentPosition.value = value
-    console.log(route.query)
     router.replace({
       name: `${items[value].route}`,
       params: { arg },
@@ -102,7 +101,7 @@ const transitionClasses = computed(() => {
 <template>
   <div>
     <WBNavbar />
-    <div class="container m-auto h-screen">
+    <div class="container m-auto pb-14">
       <WBHeader />
       <div class="flex justify-center border-t border-gray">
         <UTabs
@@ -111,12 +110,14 @@ const transitionClasses = computed(() => {
           :items="items"
         />
       </div>
-      <div class="w-full relative">
+      <div class="w-full h-full relative">
         <Transition
           v-bind="transitionClasses"
           mode="out-in"
         >
-          <NuxtPage class="absolute w-full" />
+          <NuxtPage
+            class="w-full mt-8"
+          />
         </Transition>
       </div>
     </div>

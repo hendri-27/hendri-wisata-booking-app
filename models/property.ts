@@ -36,7 +36,17 @@ export type PropertyContentModel = {
     }}
   } | null,
   id: string,
-  image: string | null,
+  image: Array<{
+    url: {
+      lg: string,
+      md: string,
+      sm: string,
+      th: string,
+      ori: string,
+    },
+    group: string,
+    caption: string,
+  }> | null,
   important_info: {
     fees: {
       optional: string,

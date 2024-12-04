@@ -6,8 +6,8 @@ const getFormattedLanguages = computed(() => {
 })
 </script>
 <template>
-  <div class="container pb-8">
-    <section class="mt-8">
+  <div class="container">
+    <section>
       <h2 class="font-medium text-xl">About the property</h2>
       <p>
         {{ property.getGeneralInfo?.descriptions?.location }} <br>
