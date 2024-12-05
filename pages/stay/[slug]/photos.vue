@@ -34,12 +34,15 @@ const nextImage = () => {
 </script>
 <template>
   <div class="container grid grid-cols-3 gap-10">
-    <div v-for="(image, index) in property.propertyContent?.image" :key="index" class="aspect-square w-full overflow-hidden hover:opacity-5 hover:ease-in-out">
+    <div v-for="(image, index) in property.propertyContent?.image" :key="index" class="aspect-square w-full overflow-hidden hover:opacity-80 hover:ease-in-out cursor-pointer">
       <img
         class="w-full h-full object-cover"
-        :src="image.url.lg" 
-        :alt="image.caption"
-        @error="$event.target.src = imageDefault"
+        :src="image?.url?.lg || imageDefault" 
+        :alt="image?.caption || 'Image is not available'"
+        @error="e => {
+          e.target.src = imageDefault
+          e.target.alt = 'Image is not available'
+        }"
         @click="openModal(image, index)"
       />
     </div>
@@ -60,10 +63,13 @@ const nextImage = () => {
         </div>
         <div class="image-container">
           <img 
-            :src="imageValue?.url.lg" 
-            :alt="imageValue?.caption"
+            :src="imageValue?.url?.lg || imageDefault" 
+            :alt="imageValue?.caption || 'Image is not available'"
             class="w-full h-full object-contain"
-            @error="$event.target.src = imageDefault"
+            @error="e => {
+              e.target.src = imageDefault
+              e.target.alt = 'Image is not available'
+            }"
           />
         </div>
         <div class="w-9 h-9 flex bg-neutral-600 items-center justify-center rounded-full cursor-pointer hover:bg-neutral-500">

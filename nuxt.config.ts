@@ -24,6 +24,10 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    mode: process.env.NUXT_PUBLIC_BUILD_MODE || 'production',
+  },
+
   ssr: false,
 
   devtools: { enabled: true },

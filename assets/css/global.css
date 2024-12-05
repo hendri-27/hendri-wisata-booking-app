@@ -1,3 +1,56 @@
 body {
   overflow-x: hidden;
 }
+
+.v-sheet--outlined {
+  border: thin solid rgba(0, 0, 0, 0.12);
+}
+
+sup {
+  top: -.5em
+}
+
+/* deals tab css */
+.stay-offer-grid{
+  grid-template-areas: 
+    "room-images room-catalog"
+    "room-images room-offer";
+}
+
+.stay-offer-grid__room-images{
+  
+  grid-area: room-images;
+}
+
+.stay-offer-grid__room-catalog{
+  background-color: transparent !important;
+  border-bottom: none;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  grid-area: room-catalog;
+}
+
+.stay-offer-grid__room-offer{
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  grid-area: room-offer;
+}
+
+.stay-availability-room-images--grid{
+  grid-template-areas:
+    "main main main"
+    "other-1 other-2 other-3";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+}
+
+.price-display-grid--split {
+  grid-template-areas:
+    "saving-pct a"
+    "strikethru b"
+    "rate-nightly btn"
+    "total-price btn"
+    "tax-fees btn"
+    "disclaimer disclaimer";
+  grid-template-columns: 1fr auto;
+}

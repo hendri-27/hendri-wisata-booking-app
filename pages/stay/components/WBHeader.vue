@@ -12,7 +12,7 @@ const getFormattedAddress = computed(() => {
       <UAvatar
         :src="property.propertyContent?.catalog.hero_image_url.md"
         :alt="property.propertyContent?.name"
-        img-class="w-[100%] h-[100%]"
+        img-class="w-[100%] h-[100%] object-cover"
         class="w-[160px] h-[160px]"
       />
     </div>

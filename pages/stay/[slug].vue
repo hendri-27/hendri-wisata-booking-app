@@ -2,6 +2,7 @@
 const route = useRoute()
 const router = useRouter()
 const property = useProperty()
+const stay = useStay()
 
 const { slug } = route.params
 const query = route.query
@@ -38,6 +39,7 @@ const previousPosition = ref(currentPosition.value)
 
 onMounted(async () => {
   await property.getPropertyContent(id)
+  await stay.getStayAvailability(id, query)
 
   nextTick(() => {
     isFirstRender.value = false
@@ -116,7 +118,7 @@ const transitionClasses = computed(() => {
           mode="out-in"
         >
           <NuxtPage
-            class="w-full mt-8"
+            class="w-full mt-5"
           />
         </Transition>
       </div>
