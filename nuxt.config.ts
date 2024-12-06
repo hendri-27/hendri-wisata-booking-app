@@ -27,7 +27,7 @@ export default defineNuxtConfig({
 
   ssr: false,
 
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NUXT_PUBLIC_BUILD_MODE === 'production' ? false : true },
 
   modules: [
     '@pinia/nuxt',
