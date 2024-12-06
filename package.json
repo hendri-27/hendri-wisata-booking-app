@@ -19,8 +19,5 @@
     "pinia": "^2.3.0",
     "vue": "latest",
     "vue-router": "latest"
-  },
-  "devDependencies": {
-    "daisyui": "^4.12.14"
   }
 }

@@ -15,14 +15,6 @@ export default {
       'square': '1 / 1',
     }
   },
-  plugins: [
-    require('daisyui')
-  ],
-  darkMode: 'class',
-  daisyui: {
-    themes: ['light'],
-    darkTheme: 'light',
-    darkMode: false,
-  }
+  darkMode: 'class'
 }
 

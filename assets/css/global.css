@@ -2,6 +2,12 @@ body {
   overflow-x: hidden;
 }
 
+.appbartop-grid {
+  align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+
 .v-sheet--outlined {
   border: thin solid rgba(0, 0, 0, 0.12);
 }
@@ -53,4 +59,29 @@ sup {
     "tax-fees btn"
     "disclaimer disclaimer";
   grid-template-columns: 1fr auto;
+}
+
+.top-middle {
+  top: calc(50% - 20px);
+}
+
+.room-details-grid--horizontal {
+  grid-template-areas:
+    "carousel title"
+    "carousel content";
+  grid-template-columns: 1fr minmax(auto, 280px);
+  grid-template-rows: auto 1fr;
+  min-height: 560px;
+}
+
+@media (min-width: 800px) {
+  .room-details-grid--horizontal {
+    grid-template-columns: 1fr minmax(auto, 320px);
+  }
+}
+
+@media (min-width: 984px) {
+  .room-details-grid--horizontal {
+    grid-template-columns: 1fr minmax(auto, 400px);
+  }
 }

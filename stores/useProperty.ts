@@ -3,10 +3,10 @@ export const useProperty = defineStore('propertyStore', {
     propertyContent: null as PropertyContentModel | null,
   }),
   getters: {
-    getGeneralInfo: (state): Object | null => {
+    getGeneralInfo: (state): any | null => {
       return state.propertyContent?.general_info || null
     },
-    getImportantInfo: (state): Object | null => {
+    getImportantInfo: (state): any | null => {
       return state.propertyContent?.important_info || null
     }
   },

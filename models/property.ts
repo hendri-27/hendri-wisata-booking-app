@@ -69,7 +69,7 @@ export type PropertyContentModel = {
   room: { [id: string]:  RoomResponse }
 }
 
-type RoomResponse = {
+export type RoomResponse = {
   amenities: { [id: string]: RoomAmenitiesResponse },
   area: {
     square_feet: number,
@@ -80,15 +80,7 @@ type RoomResponse = {
     overview: string,
   },
   id: string,
-  images: Array<{
-    caption: string,
-    category: number,
-    hero_image: boolean,
-    links: { [dimension: string]: {
-      href: string,
-      method: string,
-    }},
-  }>,
+  images: Array<ImageModel>,
   name: string,
   occupancy: {
     age_categories: { [name: string]: {
@@ -103,7 +95,17 @@ type RoomResponse = {
   }
 }
 
-type RoomAmenitiesResponse = {
+export type ImageModel = {
+  caption: string,
+  category: number,
+  hero_image: boolean,
+  links: { [dimension: string]: {
+    href: string,
+    method: string,
+  }},
+}
+
+export type RoomAmenitiesResponse = {
   categories: string[] | undefined,
   id: string,
   name: string,

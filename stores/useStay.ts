@@ -63,6 +63,7 @@ export const useStay = defineStore("stayStore", {
             room_bed_groups: stayOffer.room_bed_groups,
             room_size_sqm: stayOffer.room_size_sqm,
             room_images: stayOffer.room_images,
+            room_data: stayOffer.room_data,
             grouped_rooms: [],
           })
         }

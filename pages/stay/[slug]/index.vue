@@ -1,9 +1,46 @@
-<script setup>
+<script lang="ts" setup>
 import imageDefault from '~/assets/img/fallback-global.png'
 import WBDealsSkeleton from '../components/WBDealsSkeleton.vue'
 
 const stay = useStay()
 const property = useProperty()
+const amenity = useAmenity()
+
+const offerDetail = ref<RoomModel>()
+const roomDetail = ref<RoomResponse>()
+const roomId = ref<string>("")
+const isModalOpen = ref(false)
+const idxImage = ref(0)
+const imagesLen = computed(() => roomDetail.value?.images.length ?? 0)
+const imageValue = ref<ImageModel | null>(null)
+
+const openModal = (offer : RoomModel, id: string) => {
+  offerDetail.value = offer
+  amenity.groupByCategory(property.propertyContent?.room[id].amenities ?? {})
+  roomDetail.value = property.propertyContent?.room[id]
+  imageValue.value = roomDetail.value?.images[idxImage.value] ?? null
+  roomId.value = id
+  isModalOpen.value = true
+}
+
+const prevImage = () => {
+  if (idxImage.value - 1 < 0) {
+    idxImage.value = imagesLen.value - 1
+  } else {
+    idxImage.value -= 1
+  }
+  imageValue.value = roomDetail.value?.images[idxImage.value] ?? null
+}
+
+const nextImage = () => {
+  if (idxImage.value + 1 > imagesLen.value - 1) {
+    idxImage.value = 0
+  } else {
+    idxImage.value += 1
+  }
+
+  imageValue.value = roomDetail.value?.images[idxImage.value] ?? null
+}
 </script>
 
 <template>
@@ -86,6 +123,7 @@ const property = useProperty()
               :ui="{
                 rounded: 'rounded-full'
               }"
+              @click="openModal(offer, offer.room_data.id)"
             >
               See details
             </UButton>
@@ -107,7 +145,7 @@ const property = useProperty()
             </span>
           </div>
         </div>
-        <div class="stay-offer-grid__room-images overflow-hidden rounded-lg min-w-fit">
+        <div class="stay-offer-grid__room-images overflow-hidden rounded-lg min-w-fit" @click="openModal(offer, offer.room_data.id)">
           <div class="grid gap-0.5 stay-availability-room-images--grid cursor-pointer">
             <div style="grid-area: main;">
               <div class="relative">
@@ -116,9 +154,9 @@ const property = useProperty()
                     class="absolute w-full h-full object-cover"
                     :src="offer.room_images?.[0]?.size_sm || imageDefault"
                     :alt="offer.room_images?.[0]?.caption || 'Image is not available'"
-                    @error="e => {
-                      e.target.src = imageDefault
-                      e.target.alt = 'Image is not available'
+                    @error="(e: any) => {
+                      e.target.src = imageDefault;
+                      e.target.alt = 'Image is not available';
                     }"
                   />
                   <div class="flex absolute bottom-0 left-0 shadow-md rounded justify-center items-center px-2 py-1 m-4 gap-1 bg-white">
@@ -137,9 +175,9 @@ const property = useProperty()
                   class="absolute w-full h-full object-cover"
                   :src="offer.room_images?.[1]?.size_sm || imageDefault"
                   :alt="offer.room_images?.[1]?.caption || 'Image is not available'"
-                  @error="e => {
-                    e.target.src = imageDefault
-                    e.target.alt = 'Image is not available'
+                  @error="(e: any) => {
+                      e.target.src = imageDefault;
+                      e.target.alt = 'Image is not available';
                   }"
                 />
               </div>
@@ -150,9 +188,9 @@ const property = useProperty()
                   class="absolute w-full h-full object-cover"
                   :src="offer.room_images?.[2]?.size_sm || imageDefault"
                   :alt="offer.room_images?.[2]?.caption || 'Image is not available'"
-                  @error="e => {
-                    e.target.src = imageDefault
-                    e.target.alt = 'Image is not available'
+                  @error="(e: any) => {
+                    e.target.src = imageDefault;
+                    e.target.alt = 'Image is not available';
                   }"
                 />
               </div>
@@ -163,9 +201,9 @@ const property = useProperty()
                   class="absolute w-full h-full object-cover"
                   :src="offer.room_images?.[3]?.size_sm || imageDefault"
                   :alt="offer.room_images?.[3]?.caption || 'Image is not available'"
-                  @error="e => {
-                    e.target.src = imageDefault
-                    e.target.alt = 'Image is not available'
+                  @error="(e: any) => {
+                    e.target.src = imageDefault;
+                    e.target.alt = 'Image is not available';
                   }"
                 />
               </div>
@@ -338,6 +376,104 @@ const property = useProperty()
           </div>
         </div>
       </div>
+      <UModal
+        v-model="isModalOpen"
+        :ui="{
+          container: 'w-full',
+          width: 'sm:max-w-[900px]',
+          background: '',
+          shadow: '',
+          overlay: {
+            background: 'bg-wb-black-100',
+          }
+        }"
+      >
+        <div class="grid room-details-grid--horizontal rounded-lg bg-white overflow-hidden max-h-[400px]">
+          <div class="flex items-center h-full bg-black relative" style="grid-area: carousel;">
+            <div class="flex flex-col w-full relative">
+              <div class="flex h-0 relative pb-[75%] overflow-hidden">
+                <img
+                  :src="imageValue?.links['1000px']?.href || imageDefault"
+                  :alt="imageValue?.caption || 'Image is not available'"
+                  class="absolute w-full h-full object-cover"
+                  @error="(e: any) => {
+                    e.target.src = imageDefault;
+                    e.target.alt = 'Image is not available';
+                  }"
+                />
+              </div>
+              <div class="absolute top-middle left-0 mx-5 w-9 h-9 flex bg-[#0000004d] items-center justify-center rounded-full cursor-pointer hover:bg-[#00000033]">
+                <UIcon name="i-mdi-chevron-left" class="bg-white w-9 h-9" @click="prevImage" />
+              </div>
+              <div class="absolute top-middle right-0 mx-5 w-9 h-9 flex bg-[#0000004d] items-center justify-center rounded-full cursor-pointer hover:bg-[#00000033]">
+                <UIcon name="i-mdi-chevron-right" class="bg-white w-9 h-9" @click="nextImage" />
+              </div>
+            </div>
+            <div class="absolute rounded-lg px-2 py-1 bottom-[2%] right-[2%] bg-[#1e1e1e]">
+              <span class="text-white text-sm">{{ idxImage + 1 }} / {{ imagesLen }}</span>
+            </div>
+          </div>
+          <div class="flex items-center px-6 justify-start sticky top-0 z-[5] p-3 relative border border-b" style="grid-area: title;">
+            <p class="text-lg font-medium">Room Details</p>
+            <UButton
+              icon="i-mdi-close"
+              color="blue"
+              variant="ghost"
+              class="absolute right-2 mr-3"
+              :ui="{
+                rounded: 'rounded-full',
+              }"
+              @click="isModalOpen = false"
+            />
+          </div>
+          <div class="px-6 py-3" style="grid-area: content;">
+            <div class="text-md font-medium">{{ offerDetail?.room_name }}</div>
+            <div class="inline-flex flex-wrap gap-2">
+              <span class="flex items-center gap-1">
+                <UIcon
+                  name="i-mdi-bed-king-outline"
+                  class="w-[18px] h-[18px] bg-wb-light-gray-100"
+                />
+                <span>{{ offerDetail?.room_bed_groups }}</span>
+              </span>
+              <span class="flex items-center gap-1">
+                <UIcon
+                  name="i-mdi-arrow-expand-vertical"
+                  class="w-[18px] h-[18px] bg-wb-light-gray-100"
+                />
+                <span>{{ offerDetail?.room_size_sqm }} m<sup>2</sup></span>
+              </span>
+            </div>
+            <div class="mt-4 mb-2 text-md font-medium">Room Amenities</div>
+            <div class="flex flex-col gap-[10px]">
+              <template v-for="group in amenity.groupAmenity">
+                <div 
+                  v-if="group.amenities"
+                >
+                  <span class="flex items-center gap-1 mb-1">
+                    <WBIcon
+                      :path="group.icon"
+                      :size="18"
+                      custom-class="fill-wb-light-gray-100"
+                    />
+                    <span>{{ group.title }}</span>
+                  </span>
+                  <ul class="list-disc list-inside ml-2">
+                    <li v-for="amenity in group.amenities" class="text-sm text-[#00000099]">{{ amenity.name }}</li>
+                  </ul>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </UModal>
     </div>
   </div>
 </template>
+
+<style scoped>
+[style*="grid-area: content"] {
+  overflow-y: auto;
+  max-height: 100%
+}
+</style>

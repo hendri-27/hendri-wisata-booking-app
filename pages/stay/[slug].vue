@@ -102,8 +102,8 @@ const transitionClasses = computed(() => {
 
 <template>
   <div>
-    <WBNavbar />
-    <div class="container m-auto pb-14">
+    <WBNavbar class="px-3" />
+    <div class="container m-auto pb-14 p-3">
       <WBHeader />
       <div class="flex justify-center border-t border-gray">
         <UTabs

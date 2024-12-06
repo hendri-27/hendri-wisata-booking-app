@@ -1,13 +1,13 @@
-<script setup>
+<script lang="ts" setup>
 import imageDefault from '~/assets/img/fallback-global.png'
 const property = useProperty()
 const idxImage= ref(0)
-const imageValue = ref(null)
+const imageValue = ref<any>(null)
 const isModalOpen = ref(false)
 
-const imagesLen = computed(() => property.propertyContent?.image?.length)
+const imagesLen = computed(() => property.propertyContent?.image?.length ?? 0)
 
-const openModal = (image, index) => {
+const openModal = (image: any, index: any) => {
   idxImage.value = index
   imageValue.value = image
   isModalOpen.value = true
@@ -19,7 +19,7 @@ const prevImage = () => {
   } else {
     idxImage.value -= 1
   }
-  imageValue.value = property.propertyContent?.image[idxImage.value]
+  imageValue.value = property.propertyContent?.image?.[idxImage.value] ?? null
 }
 
 const nextImage = () => {
@@ -29,7 +29,7 @@ const nextImage = () => {
     idxImage.value += 1
   }
 
-  imageValue.value = property.propertyContent?.image[idxImage.value]
+  imageValue.value = property.propertyContent?.image?.[idxImage.value] ?? null
 }
 </script>
 <template>
@@ -39,7 +39,7 @@ const nextImage = () => {
         class="w-full h-full object-cover"
         :src="image?.url?.lg || imageDefault" 
         :alt="image?.caption || 'Image is not available'"
-        @error="e => {
+        @error="(e: any) => {
           e.target.src = imageDefault
           e.target.alt = 'Image is not available'
         }"
@@ -49,7 +49,8 @@ const nextImage = () => {
     <UModal
       v-model="isModalOpen"
       :ui="{
-        width: 'image-modal',
+        container: 'items-center',
+        width: 'sm: mx-5 md:max-w-[75%] items-center',
         background: '',
         shadow: '',
         overlay: {
@@ -66,7 +67,7 @@ const nextImage = () => {
             :src="imageValue?.url?.lg || imageDefault" 
             :alt="imageValue?.caption || 'Image is not available'"
             class="w-full h-full object-contain"
-            @error="e => {
+            @error="(e: any) => {
               e.target.src = imageDefault
               e.target.alt = 'Image is not available'
             }"
@@ -81,11 +82,6 @@ const nextImage = () => {
 </template>
 
 <style>
-.image-modal {
-  max-width: 75% !important;
-  align-items: center;
-}
-
 .image-container {
   height: 100% !important;
   max-height: 69vh !important;

@@ -18,9 +18,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       restApiBase: process.env.NUXT_PUBLIC_BASE_REST_API,
-      restApiLocation: process.env.NUXT_PUBLIC_REST_URL_LOCATION,
-      restApiProperty: process.env.NUXT_PUBLIC_REST_URL_PROPERTY,
-      restApiStay: process.env.NUXT_PUBLIC_REST_URL_STAY,
     }
   },
 

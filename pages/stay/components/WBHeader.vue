@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 const property = useProperty()
 
 const getFormattedAddress = computed(() => {
@@ -7,8 +7,8 @@ const getFormattedAddress = computed(() => {
 </script>
 
 <template>
-  <div class="flex pt-4 pb-8">
-    <div class="flex flex-col items-center w-1/3">
+  <div class="flex pt-4 pb-8 gap-5">
+    <div class="flex flex-col items-center w-1/3 p-2">
       <UAvatar
         :src="property.propertyContent?.catalog.hero_image_url.md"
         :alt="property.propertyContent?.name"
@@ -16,14 +16,14 @@ const getFormattedAddress = computed(() => {
         class="w-[160px] h-[160px]"
       />
     </div>
-    <div class="flex flex-col grow">
+    <div class="flex flex-col grow p-2">
       <div class="flex align-center">
       <span class="font-bold pr-1 text-xl">{{ property.propertyContent?.name }}</span>
       <div class="flex items-center">
         <UIcon
           v-for="i in 5"
           name="i-heroicons-star-16-solid"
-          :class="property.propertyContent?.catalog.star_rating >= i ? `bg-wb-orange` : ''"
+          :class="property.propertyContent?.catalog?.star_rating && property.propertyContent?.catalog?.star_rating >= i ? `bg-wb-orange` : ''"
         />
       </div>
       </div>

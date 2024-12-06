@@ -1,8 +1,8 @@
-<script setup>
+<script lang="ts" setup>
 const property = useProperty()
 
 const getFormattedLanguages = computed(() => {
-  return property.getGeneralInfo?.spoken_languages ? Object.values(property.getGeneralInfo?.spoken_languages).map((val) => val.name).join(', ') + '.' : ''
+  return property.getGeneralInfo?.spoken_languages ? Object.values(property.getGeneralInfo?.spoken_languages).map((val: any) => val.name).join(', ') + '.' : '' 
 })
 </script>
 <template>

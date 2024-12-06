@@ -126,5 +126,10 @@ export type RoomModel = {
     caption: string,
     size_sm: string,
   }>,
+  room_data: {
+    is_mapped: boolean,
+    is_decoded: boolean,
+    id: string,
+  },
   grouped_rooms: Array<StayAvailabilityModel>,
 }
